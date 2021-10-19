@@ -7,19 +7,19 @@ const handleErrors = require('../errors/handle-errors');
 const notFoundErrorMessage = errorMessages.notFoundErrorMessages.movies;
 const { forbiddenErrorMessage } = errorMessages;
 
-const getMovies = (req, res, next) => {
+const getExchanges = (req, res, next) => {
   Movie.find({})
     .then((movies) => res.send({ movies: movies.reverse() }))
     .catch((err) => next(handleErrors(err)));
 };
 
-const addMovie = (req, res, next) => {
+const addExchange = (req, res, next) => {
   Movie.create({ owner: req.user._id, ...req.body })
     .then((movie) => res.send({ movie }))
     .catch((err) => next(handleErrors(err)));
 };
 
-const deleteMovie = (req, res, next) => {
+const deleteExchange = (req, res, next) => {
   const { movieId } = req.params;
 
   Movie.findById(movieId)
@@ -36,7 +36,7 @@ const deleteMovie = (req, res, next) => {
 };
 
 module.exports = {
-  getMovies,
-  addMovie,
-  deleteMovie,
-};
+  getExchanges,
+  addExchange,
+  deleteExchange
+}
